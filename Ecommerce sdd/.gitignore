@@ -1,0 +1,33 @@
+# Environment
+.env
+.venv/
+venv/
+env/
+
+# Flask instance folder (contains SQLite DB)
+instance/
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+
+# Database files
+*.db
+*.sqlite3
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp

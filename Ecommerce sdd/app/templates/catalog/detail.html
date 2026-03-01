@@ -1,0 +1,140 @@
+{% extends "base.html" %}
+
+{% block title %}{{ product.name }}{% endblock %}
+
+{% block content %}
+<div class="container my-4">
+
+  <!-- Breadcrumb -->
+  <nav aria-label="breadcrumb" class="mb-4">
+    <ol class="breadcrumb" style="font-size:0.82rem;">
+      <li class="breadcrumb-item"><a href="{{ url_for('catalog.index') }}" style="color:var(--primary)">All Products</a></li>
+      <li class="breadcrumb-item"><a href="{{ url_for('catalog.index') }}?category={{ product.category }}" style="color:var(--primary)">{{ product.category }}</a></li>
+      <li class="breadcrumb-item active text-muted" aria-current="page">{{ product.name }}</li>
+    </ol>
+  </nav>
+
+  <div class="row g-4 g-lg-5">
+
+    <!-- Product Image -->
+    <div class="col-12 col-md-5">
+      <img
+        src="{{ product.image_file if product.image_file.startswith('https://') else url_for('static', filename='images/' + product.image_file) }}"
+        class="detail-img shadow-sm"
+        alt="{{ product.name }}"
+      />
+      <!-- Trust badges -->
+      <div class="d-flex flex-wrap gap-3 mt-3">
+        <div class="trust-badge"><i class="bi bi-shield-check-fill"></i> Secure Payment</div>
+        <div class="trust-badge"><i class="bi bi-truck"></i> Fast Delivery</div>
+        <div class="trust-badge"><i class="bi bi-arrow-return-left"></i> Easy Returns</div>
+      </div>
+    </div>
+
+    <!-- Product Info -->
+    <div class="col-12 col-md-7">
+      <span class="category-tag" style="font-size:0.75rem;">{{ product.category }}</span>
+      <h1 class="fw-bold mt-2 mb-1" style="font-size:1.9rem; color:var(--text); letter-spacing:-0.5px;">{{ product.name }}</h1>
+
+      <!-- Stars & reviews -->
+      <div class="d-flex align-items-center gap-2 mb-3">
+        <span class="stars" style="font-size:1rem;">
+          ★★★★{% if product.id % 3 != 0 %}★{% else %}☆{% endif %}
+        </span>
+        <span class="stars-count">{{ product.id * 7 + 12 }} reviews</span>
+        <span class="text-muted" style="font-size:0.75rem;">|</span>
+        <span class="text-muted" style="font-size:0.75rem;">Product #{{ product.id }}</span>
+      </div>
+
+      <!-- Price -->
+      <div class="mb-3 d-flex align-items-baseline gap-2">
+        <span class="detail-price">${{ "%.2f"|format(product.price) }}</span>
+        {% if product.id % 3 == 0 and product.stock > 0 %}
+          <span class="price-orig fs-5">${{ "%.2f"|format(product.price|float * 1.2) }}</span>
+          <span class="badge rounded-pill" style="background:#FEE2E2;color:#991B1B;font-size:0.75rem;">Save 17%</span>
+        {% endif %}
+      </div>
+
+      <!-- Stock status -->
+      {% if product.stock == 0 %}
+        <div class="alert d-inline-flex align-items-center gap-2 py-2 px-3 mb-3"
+             style="background:#FEE2E2;color:#991B1B;border:none;border-radius:50px;font-size:0.85rem;font-weight:600;">
+          <i class="bi bi-x-circle-fill"></i> Out of Stock — Currently Unavailable
+        </div>
+      {% elif product.stock <= 5 %}
+        <div class="alert d-inline-flex align-items-center gap-2 py-2 px-3 mb-3"
+             style="background:#FEF3C7;color:#92400E;border:none;border-radius:50px;font-size:0.85rem;font-weight:600;">
+          <i class="bi bi-exclamation-triangle-fill"></i> Only <strong>{{ product.stock }}</strong> left in stock — Order soon!
+        </div>
+      {% else %}
+        <div class="alert d-inline-flex align-items-center gap-2 py-2 px-3 mb-3"
+             style="background:#D1FAE5;color:#065F46;border:none;border-radius:50px;font-size:0.85rem;font-weight:600;">
+          <i class="bi bi-check-circle-fill"></i> In Stock ({{ product.stock }} available)
+        </div>
+      {% endif %}
+
+      <!-- Description -->
+      <h6 class="fw-bold mb-1" style="color:var(--text)">About this product</h6>
+      <p style="color:var(--text-muted);font-size:0.9rem;line-height:1.7;">{{ product.description }}</p>
+
+      <!-- Details table -->
+      <table class="table table-sm table-borderless mt-2" style="font-size:0.85rem;width:auto;">
+        <tbody>
+          <tr>
+            <th class="pe-4" style="color:var(--text-muted);font-weight:600;">Category</th>
+            <td>{{ product.category }}</td>
+          </tr>
+          <tr>
+            <th class="pe-4" style="color:var(--text-muted);font-weight:600;">Availability</th>
+            <td>{{ product.stock }} units</td>
+          </tr>
+          <tr>
+            <th class="pe-4" style="color:var(--text-muted);font-weight:600;">Product ID</th>
+            <td>#{{ product.id }}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Add to Cart -->
+      <form method="POST" action="{{ url_for('cart.add') }}" class="mt-3">
+        <input type="hidden" name="product_id" value="{{ product.id }}" />
+
+        {% if product.stock > 0 %}
+        <!-- Quantity picker -->
+        <div class="mb-3">
+          <label class="form-label fw-semibold mb-2" style="font-size:0.85rem;color:var(--text)">Quantity</label>
+          <div class="d-flex align-items-center gap-3">
+            <div class="qty-wrapper">
+              <button type="button" class="qty-btn" data-dir="down">−</button>
+              <input type="number" name="quantity" class="qty-field"
+                     id="qty-input" value="1" min="1" max="{{ product.stock }}"
+                     data-max="{{ product.stock }}" />
+              <button type="button" class="qty-btn" data-dir="up">+</button>
+            </div>
+            <span style="font-size:0.8rem;color:var(--text-muted);">Max {{ product.stock }}</span>
+          </div>
+        </div>
+        {% endif %}
+
+        <div class="d-flex gap-3 flex-wrap">
+          <button
+            type="submit"
+            class="btn-add-cart"
+            {% if product.stock == 0 %}disabled{% endif %}
+          >
+            {% if product.stock == 0 %}
+              <i class="bi bi-x-circle me-2"></i>Out of Stock
+            {% else %}
+              <i class="bi bi-bag-plus-fill me-2"></i>Add to Cart
+            {% endif %}
+          </button>
+          <a href="{{ url_for('catalog.index') }}" class="btn btn-outline-secondary rounded-pill px-4" style="font-size:0.9rem;">
+            <i class="bi bi-arrow-left me-1"></i>Continue Shopping
+          </a>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>
+{% endblock %}

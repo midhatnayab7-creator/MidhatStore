@@ -1,0 +1,198 @@
+{% extends "base.html" %}
+
+{% block title %}
+  {% if query %}Results for "{{ query }}"{% elif category %}{{ category }}{% else %}All Products{% endif %}
+{% endblock %}
+
+{% block content %}
+
+<!-- ── Hero Section (only on main catalog, no search/filter active) ── -->
+{% if not query and not category %}
+<div class="hero-section">
+  <div class="container position-relative">
+    <div class="row align-items-center">
+      <div class="col-12 col-md-7">
+        <div class="hero-eyebrow">✨ New Arrivals Every Week</div>
+        <h1 class="hero-title">
+          Shop the <span>Best Deals</span><br>at Midhat Store
+        </h1>
+        <p class="hero-subtitle">
+          Discover thousands of products across Electronics, Clothing, Kitchen & Books — all at unbeatable prices.
+        </p>
+        <a href="#products" class="hero-cta">
+          <i class="bi bi-bag-fill"></i> Shop Now
+        </a>
+      </div>
+      <div class="col-md-5 d-none d-md-flex justify-content-center gap-4 mt-3 mt-md-0">
+        <div class="hero-stat text-center">
+          <div class="hero-stat-number">11+</div>
+          <div class="hero-stat-label">Products</div>
+        </div>
+        <div class="hero-stat text-center">
+          <div class="hero-stat-number">4</div>
+          <div class="hero-stat-label">Categories</div>
+        </div>
+        <div class="hero-stat text-center">
+          <div class="hero-stat-number">⭐ 4.8</div>
+          <div class="hero-stat-label">Avg Rating</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+
+<!-- ── Main Container ── -->
+<div class="container my-4" id="products">
+
+  <!-- Category Filter Pills -->
+  {% if categories %}
+  <div class="category-filters">
+    <a href="{{ url_for('catalog.index') }}{% if query %}?q={{ query }}{% endif %}"
+       class="category-pill {% if not category %}active{% endif %}">
+      <i class="bi bi-grid-fill me-1"></i>All
+    </a>
+    {% for cat in categories %}
+    <a href="{{ url_for('catalog.index') }}?category={{ cat }}{% if query %}&q={{ query }}{% endif %}"
+       class="category-pill {% if category == cat %}active{% endif %}">
+      {% if cat == 'Electronics' %}<i class="bi bi-lightning-fill me-1"></i>
+      {% elif cat == 'Clothing' %}<i class="bi bi-bag-fill me-1"></i>
+      {% elif cat == 'Kitchen' %}<i class="bi bi-cup-hot-fill me-1"></i>
+      {% elif cat == 'Books' %}<i class="bi bi-book-fill me-1"></i>
+      {% elif cat == 'Fast Food' %}<i class="bi bi-egg-fried me-1"></i>
+      {% else %}<i class="bi bi-tag-fill me-1"></i>{% endif %}
+      {{ cat }}
+    </a>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  <!-- Heading row -->
+  <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+    <div>
+      {% if query %}
+        <h2 class="section-heading">
+          <i class="bi bi-search text-muted"></i>
+          Results for "<span style="color:var(--primary)">{{ query }}</span>"
+          <span class="text-muted fw-normal fs-6">({{ products|length }} found)</span>
+        </h2>
+        <a href="{{ url_for('catalog.index') }}" class="small text-muted text-decoration-none">
+          <i class="bi bi-x-circle me-1"></i>Clear search
+        </a>
+      {% elif category %}
+        <h2 class="section-heading">
+          {% if category == 'Electronics' %}<i class="bi bi-lightning-fill" style="color:var(--primary)"></i>
+          {% elif category == 'Clothing' %}<i class="bi bi-bag-fill" style="color:var(--primary)"></i>
+          {% elif category == 'Kitchen' %}<i class="bi bi-cup-hot-fill" style="color:var(--primary)"></i>
+          {% elif category == 'Books' %}<i class="bi bi-book-fill" style="color:var(--primary)"></i>
+          {% elif category == 'Fast Food' %}<i class="bi bi-egg-fried" style="color:var(--primary)"></i>
+          {% else %}<i class="bi bi-tag-fill" style="color:var(--primary)"></i>{% endif %}
+          {{ category }}
+          <span class="text-muted fw-normal fs-6">({{ products|length }} items)</span>
+        </h2>
+        <a href="{{ url_for('catalog.index') }}" class="small text-muted text-decoration-none">
+          <i class="bi bi-arrow-left me-1"></i>All Products
+        </a>
+      {% else %}
+        <h2 class="section-heading">
+          <i class="bi bi-stars" style="color:var(--accent)"></i>
+          All Products
+          <span class="text-muted fw-normal fs-6">({{ products|length }} items)</span>
+        </h2>
+      {% endif %}
+    </div>
+  </div>
+
+  <!-- Product Grid -->
+  {% if products %}
+    <div class="row g-4">
+      {% for product in products %}
+      <div class="col-12 col-sm-6 col-lg-4 fade-in" style="animation-delay: {{ loop.index0 * 0.04 }}s">
+        <div class="card h-100 product-card">
+
+          <!-- Image -->
+          <div class="product-img-wrapper">
+            <img
+              src="{{ product.image_file if product.image_file.startswith('https://') else url_for('static', filename='images/' + product.image_file) }}"
+              class="product-img"
+              alt="{{ product.name }}"
+            />
+            <!-- Badges based on position / stock -->
+            {% if loop.index <= 3 %}
+              <span class="img-badge img-badge-new">New</span>
+            {% elif product.stock > 0 and product.id % 3 == 0 %}
+              <span class="img-badge img-badge-sale">Sale</span>
+            {% elif product.id % 5 == 0 %}
+              <span class="img-badge img-badge-hot">Hot</span>
+            {% endif %}
+          </div>
+
+          <!-- Body -->
+          <div class="card-body d-flex flex-column px-3 pt-3 pb-2">
+            <div class="d-flex align-items-center justify-content-between mb-1">
+              <span class="category-tag">{{ product.category }}</span>
+              <!-- Stock chip -->
+              {% if product.stock == 0 %}
+                <span class="stock-chip stock-out">Out of Stock</span>
+              {% elif product.stock <= 5 %}
+                <span class="stock-chip stock-low">Only {{ product.stock }} left</span>
+              {% else %}
+                <span class="stock-chip stock-in">In Stock</span>
+              {% endif %}
+            </div>
+
+            <h5 class="card-title fw-bold mb-1" style="font-size:0.95rem; color:var(--text)">{{ product.name }}</h5>
+
+            <!-- Stars -->
+            <div class="mb-2">
+              <span class="stars">
+                {% set rating = 5 if product.id % 4 == 1 else (4 if product.id % 4 == 2 else (45 if product.id % 4 == 3 else 4)) %}
+                ★★★★{% if product.id % 3 != 0 %}★{% else %}☆{% endif %}
+              </span>
+              <span class="stars-count">({{ product.id * 7 + 12 }} reviews)</span>
+            </div>
+
+            <p class="card-text small flex-grow-1" style="color:var(--text-muted); font-size:0.8rem; line-height:1.5;">
+              {{ product.description[:90] }}{% if product.description|length > 90 %}…{% endif %}
+            </p>
+
+            <!-- Price row -->
+            <div class="d-flex align-items-center mt-2">
+              <span class="price-main">${{ "%.2f"|format(product.price) }}</span>
+              {% if product.id % 3 == 0 and product.stock > 0 %}
+                <span class="price-orig">${{ "%.2f"|format(product.price|float * 1.2) }}</span>
+              {% endif %}
+            </div>
+          </div>
+
+          <!-- Footer -->
+          <div class="card-footer bg-transparent border-0 px-3 pb-3">
+            <a href="{{ url_for('catalog.detail', id=product.id) }}" class="btn-view">
+              <i class="bi bi-eye me-1"></i>View Details
+            </a>
+          </div>
+
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+  {% else %}
+    <div class="text-center py-5">
+      <div style="font-size:4rem; color:var(--primary-light);">🔍</div>
+      <h3 class="mt-3 fw-bold" style="color:var(--text)">No products found</h3>
+      {% if query %}
+        <p class="text-muted">No results for <strong>"{{ query }}"</strong>. Try a different keyword or
+          <a href="{{ url_for('catalog.index') }}" style="color:var(--primary)">browse all products</a>.
+        </p>
+      {% else %}
+        <p class="text-muted">This category is currently empty. Check back soon!</p>
+      {% endif %}
+      <a href="{{ url_for('catalog.index') }}" class="btn-view d-inline-block mt-2 px-4">
+        <i class="bi bi-arrow-left me-1"></i>Back to All Products
+      </a>
+    </div>
+  {% endif %}
+
+</div>
+{% endblock %}
