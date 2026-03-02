@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: makkah-banquet-ai
+    runtime: python
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "gunicorn ai_server:app"
+    envVars:
+      - key: GROQ_API_KEY
+        scope: run
+        isFile: false
