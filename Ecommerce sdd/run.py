@@ -4,22 +4,27 @@ from app.models import Product
 
 app = create_app()
 
+_seeded = False
 
-def seed_if_needed():
-    """Seed the database with initial data if empty or outdated."""
-    from seeds.products import SEED_PRODUCTS
-    expected = len([p for p in SEED_PRODUCTS if p.get("is_active", True)])
-    actual = Product.query.filter_by(is_active=True).count()
-    if actual < expected:
-        print(f"Database has {actual} active products, expected {expected} — reseeding...")
-        from seeds.products import seed_products
-        seed_products()
-        print("Seeding complete.")
-
-
-with app.app_context():
-    db.create_all()
-    seed_if_needed()
+@app.before_request
+def ensure_db():
+    global _seeded
+    if not _seeded:
+        db.create_all()
+        from seeds.products import SEED_PRODUCTS
+        expected = len([p for p in SEED_PRODUCTS if p.get("is_active", True)])
+        actual = Product.query.filter_by(is_active=True).count()
+        if actual < expected:
+            from seeds.products import seed_products
+            seed_products()
+        _seeded = True
 
 if __name__ == "__main__":
+    with app.app_context():
+        db.create_all()
+        from seeds.products import SEED_PRODUCTS, seed_products
+        expected = len([p for p in SEED_PRODUCTS if p.get("is_active", True)])
+        actual = Product.query.filter_by(is_active=True).count()
+        if actual < expected:
+            seed_products()
     app.run(debug=True, port=5000)

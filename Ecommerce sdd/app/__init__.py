@@ -13,17 +13,22 @@ def create_app(test_config=None):
 
     # Default configuration
     app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY", "dev-secret-change-me")
+
+    # Use /tmp on Vercel (serverless), otherwise use instance folder
+    if os.environ.get("VERCEL"):
+        db_path = "/tmp/store.db"
+    else:
+        os.makedirs(app.instance_path, exist_ok=True)
+        db_path = os.path.join(app.instance_path, "store.db")
+
     app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get(
-        "DATABASE_URL", f"sqlite:///{os.path.join(app.instance_path, 'store.db')}"
+        "DATABASE_URL", f"sqlite:///{db_path}"
     )
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
     # Override config for testing
     if test_config is not None:
         app.config.update(test_config)
-
-    # Ensure the instance folder exists
-    os.makedirs(app.instance_path, exist_ok=True)
 
     # Initialize extensions
     db.init_app(app)
