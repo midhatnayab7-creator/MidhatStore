@@ -1,0 +1,69 @@
+2️⃣ Go to a project folder
+
+Codex works inside a folder.
+
+Example (you can change the path):
+
+cd C:\Users\kk\Desktop
+
+
+Or create a new project folder:
+
+mkdir codex-test
+cd codex-test
+
+3️⃣ Run Codex (basic run)
+
+Now type:
+
+codex
+
+
+👉 This starts interactive Codex mode.
+
+You’ll see a prompt where you can talk to Codex in plain English.
+
+4️⃣ What you can type INSIDE Codex
+
+Examples you can literally type:
+
+Explain this folder
+
+Create a README.md file for this project
+
+Generate a simple Node.js app
+
+Fix errors in my code
+
+
+Codex will:
+
+Read files
+
+Create files
+
+Modify code
+
+Explain code
+
+5️⃣ Run Codex for a single command (non-interactive)
+
+Example:
+
+codex "create a simple HTML login page"
+
+
+This runs once and exits.
+
+6️⃣ Exit Codex
+
+When finished:
+
+exit
+
+
+or press Ctrl + C
+
+✅ One-line memory (important)
+cd your-project-folder
+codex

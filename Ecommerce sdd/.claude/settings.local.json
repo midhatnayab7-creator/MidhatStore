@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls:*)",
+      "Bash(dir:*)",
+      "Bash(.venv/Scripts/pytest.exe:*)",
+      "Bash(powershell.exe:*)",
+      "Bash(.venv/Scripts/python.exe:*)",
+      "Bash(source:*)",
+      "mcp__playwright__browser_wait_for",
+      "mcp__playwright__browser_navigate",
+      "mcp__playwright__browser_take_screenshot",
+      "mcp__playwright__browser_run_code",
+      "Bash(rm:*)",
+      "Bash(.venv/Scripts/pip.exe install:*)",
+      "Bash(curl:*)",
+      "Bash(pip install:*)",
+      "Bash(gh repo:*])"
+    ]
+  }
+}

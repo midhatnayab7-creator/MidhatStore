@@ -1,0 +1,22 @@
+
+● URLs for MidhatStore:
+
+  Local (Your Computer):
+  - http://localhost:5000
+
+  Share With Others (Public):
+  To share publicly, you need to expose your local server:
+
+  Option 1: ngrok (easiest)
+  - Download: https://ngrok.com
+  - Run: ngrok http 5000
+  - Share the generated URL (e.g., https://abc123.ngrok.io)
+
+  Option 2: Cloudflare Tunnel
+  - Free alternative, more stable
+  - Check: https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/
+
+  App Status: ✅ Running on port 5000
+  - 17 products loaded
+  - All 5 categories available (Electronics, Clothing, Kitchen, Books, Fast Food)
+  - Shopping cart ready
