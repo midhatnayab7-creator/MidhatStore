@@ -14,8 +14,9 @@ def seed_if_empty():
         print("Seeding complete.")
 
 
+with app.app_context():
+    db.create_all()
+    seed_if_empty()
+
 if __name__ == "__main__":
-    with app.app_context():
-        db.create_all()
-        seed_if_empty()
     app.run(debug=True, port=5000)

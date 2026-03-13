@@ -224,6 +224,191 @@ SEED_PRODUCTS = [
         "image_file": "https://images.unsplash.com/photo-1551504734-5ee1c4a1479b?w=400&h=300&fit=crop&auto=format",
         "is_active": True,
     },
+    # ── Sports & Fitness ──────────────────────────────────────────────────────────
+    {
+        "name": "Yoga Mat Premium",
+        "description": (
+            "Extra-thick 6mm non-slip yoga mat with carrying strap. "
+            "Eco-friendly TPE material, perfect for yoga, pilates, and stretching."
+        ),
+        "price": 29.99,
+        "category": "Sports & Fitness",
+        "stock": 35,
+        "image_file": "https://images.unsplash.com/photo-1601925260368-ae2f83cf8b7f?w=400&h=300&fit=crop&auto=format",
+        "is_active": True,
+    },
+    {
+        "name": "Adjustable Dumbbells Set",
+        "description": (
+            "Pair of adjustable dumbbells ranging from 5 to 25 lbs each. "
+            "Quick-lock mechanism for easy weight changes during workouts."
+        ),
+        "price": 149.99,
+        "category": "Sports & Fitness",
+        "stock": 20,
+        "image_file": "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&h=300&fit=crop&auto=format",
+        "is_active": True,
+    },
+    {
+        "name": "Running Shoes Ultra",
+        "description": (
+            "Lightweight running shoes with responsive cushioning and breathable mesh upper. "
+            "Ideal for daily runs and marathon training."
+        ),
+        "price": 89.99,
+        "category": "Sports & Fitness",
+        "stock": 50,
+        "image_file": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&h=300&fit=crop&auto=format",
+        "is_active": True,
+    },
+    # ── Home & Decor ──────────────────────────────────────────────────────────────
+    {
+        "name": "Scented Candle Set (3pc)",
+        "description": (
+            "Set of 3 hand-poured soy wax candles in Lavender, Vanilla, and Ocean Breeze. "
+            "40-hour burn time each. Perfect for relaxation."
+        ),
+        "price": 24.99,
+        "category": "Home & Decor",
+        "stock": 60,
+        "image_file": "https://images.unsplash.com/photo-1602028915047-37269d1a73f7?w=400&h=300&fit=crop&auto=format",
+        "is_active": True,
+    },
+    {
+        "name": "Indoor Plant Pot Set",
+        "description": (
+            "Set of 3 modern ceramic plant pots with bamboo saucers. "
+            "Available in matte white. Fits plants up to 6 inches."
+        ),
+        "price": 34.99,
+        "category": "Home & Decor",
+        "stock": 40,
+        "image_file": "https://images.unsplash.com/photo-1485955900006-10f4d324d411?w=400&h=300&fit=crop&auto=format",
+        "is_active": True,
+    },
+    {
+        "name": "LED Desk Lamp",
+        "description": (
+            "Modern LED desk lamp with 5 brightness levels and 3 color temperatures. "
+            "USB charging port, touch controls, and flexible gooseneck."
+        ),
+        "price": 42.99,
+        "category": "Home & Decor",
+        "stock": 30,
+        "image_file": "https://images.unsplash.com/photo-1507473885765-e6ed057ab6fe?w=400&h=300&fit=crop&auto=format",
+        "is_active": True,
+    },
+    # ── Toys & Games ──────────────────────────────────────────────────────────────
+    {
+        "name": "1000-Piece Jigsaw Puzzle",
+        "description": (
+            "Beautiful landscape 1000-piece jigsaw puzzle. High-quality cardboard "
+            "with precision-cut pieces. Great for family bonding."
+        ),
+        "price": 16.99,
+        "category": "Toys & Games",
+        "stock": 45,
+        "image_file": "https://images.unsplash.com/photo-1606503153255-59d8b8b82176?w=400&h=300&fit=crop&auto=format",
+        "is_active": True,
+    },
+    {
+        "name": "Remote Control Car",
+        "description": (
+            "High-speed RC car with 2.4GHz remote, rechargeable battery, "
+            "and all-terrain tires. Reaches speeds up to 25 mph."
+        ),
+        "price": 39.99,
+        "category": "Toys & Games",
+        "stock": 25,
+        "image_file": "https://images.unsplash.com/photo-1581235707960-23b7e8103646?w=400&h=300&fit=crop&auto=format",
+        "is_active": True,
+    },
+    {
+        "name": "Board Game Collection",
+        "description": (
+            "Classic board game collection including Chess, Checkers, and Backgammon. "
+            "Wooden pieces with a foldable travel-friendly board."
+        ),
+        "price": 27.99,
+        "category": "Toys & Games",
+        "stock": 35,
+        "image_file": "https://images.unsplash.com/photo-1611371805429-8b5c1b2c34ba?w=400&h=300&fit=crop&auto=format",
+        "is_active": True,
+    },
+    # ── Beauty & Health ───────────────────────────────────────────────────────────
+    {
+        "name": "Skincare Gift Set",
+        "description": (
+            "Complete skincare routine set with cleanser, toner, moisturizer, and serum. "
+            "Natural ingredients, suitable for all skin types."
+        ),
+        "price": 49.99,
+        "category": "Beauty & Health",
+        "stock": 30,
+        "image_file": "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=400&h=300&fit=crop&auto=format",
+        "is_active": True,
+    },
+    {
+        "name": "Electric Toothbrush Pro",
+        "description": (
+            "Sonic electric toothbrush with 5 cleaning modes, 2-minute smart timer, "
+            "and 30-day battery life. Includes 3 replacement heads."
+        ),
+        "price": 59.99,
+        "category": "Beauty & Health",
+        "stock": 40,
+        "image_file": "https://images.unsplash.com/photo-1559591937-eba4a0f4cfb4?w=400&h=300&fit=crop&auto=format",
+        "is_active": True,
+    },
+    {
+        "name": "Aromatherapy Diffuser",
+        "description": (
+            "Ultrasonic essential oil diffuser with color-changing LED lights. "
+            "300ml capacity, whisper-quiet operation, auto shut-off."
+        ),
+        "price": 32.99,
+        "category": "Beauty & Health",
+        "stock": 55,
+        "image_file": "https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=400&h=300&fit=crop&auto=format",
+        "is_active": True,
+    },
+    # ── Stationery ────────────────────────────────────────────────────────────────
+    {
+        "name": "Premium Notebook Set",
+        "description": (
+            "Set of 3 hardcover A5 notebooks with 200 lined pages each. "
+            "Lay-flat binding, ribbon bookmark, and elastic closure."
+        ),
+        "price": 18.99,
+        "category": "Stationery",
+        "stock": 70,
+        "image_file": "https://images.unsplash.com/photo-1531346878377-a5be20888e57?w=400&h=300&fit=crop&auto=format",
+        "is_active": True,
+    },
+    {
+        "name": "Colored Pencil Set (48pc)",
+        "description": (
+            "Professional-grade colored pencil set with 48 vibrant colors. "
+            "Soft core for smooth blending, ideal for artists and students."
+        ),
+        "price": 22.99,
+        "category": "Stationery",
+        "stock": 50,
+        "image_file": "https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?w=400&h=300&fit=crop&auto=format",
+        "is_active": True,
+    },
+    {
+        "name": "Desk Organizer Bamboo",
+        "description": (
+            "Multi-compartment bamboo desk organizer for pens, pencils, phone, "
+            "and office supplies. Eco-friendly and stylish."
+        ),
+        "price": 26.99,
+        "category": "Stationery",
+        "stock": 35,
+        "image_file": "https://images.unsplash.com/photo-1544816155-12df9643f363?w=400&h=300&fit=crop&auto=format",
+        "is_active": True,
+    },
     # ── Inactive (hidden from catalog) ──────────────────────────────────────────
     {
         "name": "Discontinued Gadget Guide 2018",
