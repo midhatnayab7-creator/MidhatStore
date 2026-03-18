@@ -28,45 +28,6 @@ A full-featured e-commerce store built with **Flask** and **SQLAlchemy**, featur
 - **Frontend:** HTML, CSS, Jinja2 Templates
 - **Testing:** Pytest, pytest-flask
 
-## Getting Started
-
-```bash
-# Clone the repository
-git clone https://github.com/midhatnayab7-creator/MidhatStore.git
-cd MidhatStore/Ecommerce\ sdd
-
-# Create virtual environment
-python -m venv .venv
-source .venv/bin/activate  # On Windows: .venv\Scripts\activate
-
-# Install dependencies
-pip install -r requirements.txt
-
-# Run the application
-python run.py
-```
-
-The app will be available at **http://localhost:5000**
-
-## Project Structure
-
-```
-MidhatStore/
-├── app/
-│   ├── __init__.py          # App factory
-│   ├── models.py            # Product model
-│   ├── routes/
-│   │   ├── catalog.py       # Product browsing routes
-│   │   └── cart.py          # Shopping cart routes
-│   ├── templates/           # Jinja2 HTML templates
-│   └── static/images/       # Product images
-├── seeds/
-│   └── products.py          # Database seed data
-├── tests/                   # Test suite
-├── requirements.txt
-└── run.py                   # Entry point
-```
-
 ## Categories
 
 | Category | Products |
@@ -79,7 +40,7 @@ MidhatStore/
 
 ## Author
 
-**Midhat Nayab** - [GitHub](https://github.com/midhatnayab7-creator)
+**Midhat Nayab** — [GitHub](https://github.com/midhatnayab7-creator) | [LinkedIn](https://www.linkedin.com/in/midhat-nayab-25a6603a3) | [Email](mailto:midhatnayab7@gmail.com)
 
 ---
 
